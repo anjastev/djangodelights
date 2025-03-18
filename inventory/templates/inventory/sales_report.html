@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Sales Report</title>
+</head>
+<body>
+ <h1>Sales Report</h1>
+        <table>
+            <tr>
+                <th>Menu Item</th>
+                <th>Quantity Sold</th>
+                <th>Date Sold</th>
+            </tr>
+            {% for sale in sales %}
+            <tr>
+                <td>{{ sale.menu_item.name }}</td>
+                <td>{{ sale.quantity_sold }}</td>
+                <td>{{ sale.date_sold }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+        <br>
+        <a href="{% url 'inventory_list' %}">Back to Inventory</a>
+</body>
+</html>
