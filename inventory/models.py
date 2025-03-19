@@ -1,4 +1,6 @@
+from django.contrib.auth.models import User
 from django.db import models
+from django.utils import timezone
 
 
 class Ingredient(models.Model):
@@ -74,7 +76,7 @@ class Order(models.Model):
         return f"Order #{self.id} - {self.customer}"
 
     def calculate_total(self):
-        self.total_price = sum([item.menu_item.price * item.quantity for item in self.orderitem_set.all()])
+        self.total_price = sum([item.menu_item.price * item.quantity for item in self.order_item_set.all()])
         self.save()
 
 

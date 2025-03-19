@@ -2,9 +2,39 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Add Location</title>
 </head>
 <body>
+{% extends 'base.html' %}
+
+{% block content %}
+<h1 class="text-center">Add New Location</h1>
+
+<form method="post">
+    {% csrf_token %}
+    <div class="mb-3">
+        <label for="street" class="form-label">Street</label>
+        <input type="text" name="street" id="street" class="form-control" required>
+    </div>
+
+    <div class="mb-3">
+        <label for="number" class="form-label">Number</label>
+        <input type="text" name="number" id="number" class="form-control" required>
+    </div>
+
+    <div class="mb-3">
+        <label for="phone" class="form-label">Phone</label>
+        <input type="tel" name="phone" id="phone" class="form-control" required>
+    </div>
+
+    <div class="mb-3">
+        <label for="email" class="form-label">Email</label>
+        <input type="email" name="email" id="email" class="form-control" required>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Add Location</button>
+</form>
+{% endblock %}
 
 </body>
 </html>

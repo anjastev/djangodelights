@@ -34,7 +34,7 @@ class SaleForm(forms.ModelForm):
 class OrderForm(forms.ModelForm):
     class Meta:
         model = Order
-        fields = ['customer', 'status', 'order_date']
+        exclude = ['order_date']
 
 class OrderItemForm(forms.ModelForm):
     class Meta:

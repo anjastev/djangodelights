@@ -95,3 +95,14 @@ def add_location(request):
     else:
         form = LocationForm()
     return render(request, 'inventory/add_location.html', {'form': form})
+
+
+def create_order(request):
+    if request.method == 'POST':
+        form = OrderForm(request.POST)
+        if form.is_valid():
+            form.save()
+            # Redirect or return a response
+    else:
+        form = OrderForm()
+    return render(request, 'inventory/create_order.html', {'form': form})
