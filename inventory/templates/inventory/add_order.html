@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form method="post">
+  {% csrf_token %}
+  {{ order_form.as_p }}
+  <label for="order_items">Items:</label>
+  <select name="order_items">
+    {% for menu_item in menu_items %}
+      <option value="{{ menu_item.id }}">{{ menu_item.name }} - {{ menu_item.price }}</option>
+    {% endfor %}
+  </select>
+  <button type="submit">Add Order</button>
+</form>
+
+</body>
+</html>

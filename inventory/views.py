@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
-from .models import Ingredient, MenuItem, Sale, RecipeRequirement
-from .forms import IngredientForm, MenuItemForm, SaleForm
+from .models import Ingredient, MenuItem, Sale, RecipeRequirement, Order, OrderItem
+from .forms import IngredientForm, MenuItemForm, SaleForm, LocationForm, EmployeeForm, OrderForm
 from django.contrib import messages
 from django.db.models import Sum
 
@@ -51,3 +51,47 @@ def sales_report(request):
     sales = Sale.objects.all()
     total_sales = sales.aggregate(Sum('quantity_sold'))
     return render(request, 'inventory/sales_report.html', {'sales': sales, 'total_sales': total_sales})
+
+"""@login_required"""
+def add_order(request):
+    if request.method == 'POST':
+        order_form = OrderForm(request.POST)
+        if order_form.is_valid():
+            order = order_form.save()
+            for item in request.POST.getlist('order_items'):
+                order_item = OrderItem.objects.create(order=order, menu_item=MenuItem.objects.get(id=item['menu_item']), quantity=item['quantity'])
+            order.calculate_total()
+            return redirect('order_list')
+    else:
+        order_form = OrderForm()
+    return render(request, 'inventory/add_order.html', {'order_form': order_form})
+
+
+"""@login_required"""
+def order_list(request):
+    orders = Order.objects.all()
+    return render(request, 'inventory/order_list.html', {'orders': orders})
+
+
+"""@login_required"""
+def add_employee(request):
+    if request.method == 'POST':
+        form = EmployeeForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('employee_list')
+    else:
+        form = EmployeeForm()
+    return render(request, 'inventory/add_employee.html', {'form': form})
+
+
+"""@login_required"""
+def add_location(request):
+    if request.method == 'POST':
+        form = LocationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('location_list')
+    else:
+        form = LocationForm()
+    return render(request, 'inventory/add_location.html', {'form': form})

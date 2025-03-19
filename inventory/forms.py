@@ -1,5 +1,5 @@
 from django import forms
-from .models import Ingredient, MenuItem, Sale
+from .models import Ingredient, MenuItem, Sale, Order, OrderItem, Employee, Location
 
 
 class IngredientForm(forms.ModelForm):
@@ -30,3 +30,23 @@ class SaleForm(forms.ModelForm):
                     raise forms.ValidationError(f"Not enough {req.ingredient.name} in stock!")
 
         return quantity
+
+class OrderForm(forms.ModelForm):
+    class Meta:
+        model = Order
+        fields = ['customer', 'status', 'order_date']
+
+class OrderItemForm(forms.ModelForm):
+    class Meta:
+        model = OrderItem
+        fields = ['menu_item', 'quantity']
+
+class EmployeeForm(forms.ModelForm):
+    class Meta:
+        model = Employee
+        fields = ['user', 'role', 'location']
+
+class LocationForm(forms.ModelForm):
+    class Meta:
+        model = Location
+        fields = ['name', 'address', 'phone_number']
