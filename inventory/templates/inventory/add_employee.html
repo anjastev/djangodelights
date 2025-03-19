@@ -7,38 +7,43 @@
 <body>
 {% extends 'base.html' %}
 
+{% block title %}Add New Employee - Django Delights{% endblock %}
+
 {% block content %}
-<h1 class="text-center">Add New Employee</h1>
+    <h1>Add New Employee</h1>
 
-<form method="post">
-    {% csrf_token %}
-    <div class="mb-3">
-        <label for="first_name" class="form-label">First Name</label>
-        <input type="text" name="first_name" id="first_name" class="form-control" required>
-    </div>
+    <form action="/employees/add/" method="POST">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="user" class="form-label">User</label>
+            <select class="form-control" id="user" name="user" required>
+                {% for user in users %}
+                    <option value="{{ user.id }}">{{ user.username }}</option>
+                {% endfor %}
+            </select>
+        </div>
 
-    <div class="mb-3">
-        <label for="last_name" class="form-label">Last Name</label>
-        <input type="text" name="last_name" id="last_name" class="form-control" required>
-    </div>
+        <div class="mb-3">
+            <label for="role" class="form-label">Role</label>
+            <select class="form-control" id="role" name="role" required>
+                <option value="chef">Chef</option>
+                <option value="waiter">Waiter</option>
+            </select>
+        </div>
 
-    <div class="mb-3">
-        <label for="salary" class="form-label">Salary</label>
-        <input type="number" name="salary" id="salary" class="form-control" required>
-    </div>
+        <div class="mb-3">
+            <label for="location" class="form-label">Location</label>
+            <select class="form-control" id="location" name="location" required>
+                {% for location in locations %}
+                    <option value="{{ location.id }}">{{ location.name }}</option>
+                {% endfor %}
+            </select>
+        </div>
 
-    <div class="mb-3">
-        <label for="market" class="form-label">Select Market</label>
-        <select name="market" id="market" class="form-select" required>
-            {% for market in markets %}
-                <option value="{{ market.id }}">{{ market.name }}</option>
-            {% endfor %}
-        </select>
-    </div>
-
-    <button type="submit" class="btn btn-success">Add Employee</button>
-</form>
+        <button type="submit" class="btn btn-success">Add Employee</button>
+    </form>
 {% endblock %}
+
 
 </body>
 </html>

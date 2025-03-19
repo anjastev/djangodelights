@@ -5,35 +5,58 @@
     <title>Sales Report</title>
 </head>
 <body>
-     {% extends 'base.html' %}
+    {% extends 'base.html' %}
+
+{% block title %}Sales - Django Delights{% endblock %}
 
 {% block content %}
-<h1 class="text-center">Sales Report</h1>
+    <h1>Sales</h1>
 
-<table class="table table-striped">
-    <thead class="table-dark">
-        <tr>
-            <th>Order ID</th>
-            <th>Menu Item</th>
-            <th>Quantity</th>
-            <th>Total Price</th>
-            <th>Date</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for sale in sales %}
+    <div class="row mb-3">
+        <div class="col">
+            <a href="/sales/create/" class="btn btn-primary">Add New Sale <i class="fas fa-plus"></i></a>
+        </div>
+    </div>
+
+    <table class="table table-bordered table-striped">
+        <thead class="table-dark">
             <tr>
-                <td>{{ sale.id }}</td>
-                <td>{{ sale.menu_item.name }}</td>
-                <td>{{ sale.quantity }}</td>
-                <td>${{ sale.total_price }}</td>
-                <td>{{ sale.timestamp }}</td>
+                <th>#</th>
+                <th>Menu Item</th>
+                <th>Quantity Sold</th>
+                <th>Total Price</th>
+                <th>Timestamp</th>
             </tr>
-        {% endfor %}
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            {% for sale in sales %}
+                <tr>
+                    <td>{{ sale.id }}</td>
+                    <td>{{ sale.menu_item.name }}</td>
+                    <td>{{ sale.quantity_sold }}</td>
+                    <td>${{ sale.total_price }}</td>
+                    <td>{{ sale.timestamp }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
 
+    <!-- Pagination -->
+    <div class="pagination">
+        {% if sales.has_previous %}
+            <a href="?page=1">&laquo; First</a>
+            <a href="?page={{ sales.previous_page_number }}">Previous</a>
+        {% endif %}
+
+        <span class="current-page">Page {{ sales.number }} of {{ sales.paginator.num_pages }}</span>
+
+        {% if sales.has_next %}
+            <a href="?page={{ sales.next_page_number }}">Next</a>
+            <a href="?page={{ sales.paginator.num_pages }}">Last &raquo;</a>
+        {% endif %}
+    </div>
 {% endblock %}
+
 
 </body>
 </html>

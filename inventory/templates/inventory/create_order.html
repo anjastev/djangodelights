@@ -7,28 +7,44 @@
 <body>
 {% extends 'base.html' %}
 
+{% block title %}Create Order - Django Delights{% endblock %}
+
 {% block content %}
-<h1 class="text-center">Create Order</h1>
+    <h1>Create New Order</h1>
 
-<form method="post">
-    {% csrf_token %}
-    <div class="mb-3">
-        <label for="order_items" class="form-label">Menu Items</label>
-        <select name="order_items" id="order_items" class="form-select">
-            {% for menu_item in menu_items %}
-                <option value="{{ menu_item.id }}">{{ menu_item.name }} - ${{ menu_item.price }}</option>
-            {% endfor %}
-        </select>
-    </div>
+    <form action="/orders/create/" method="POST">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="customer" class="form-label">Customer Name</label>
+            <input type="text" class="form-control" id="customer" name="customer" required>
+        </div>
 
-    <div class="mb-3">
-        <label for="quantity" class="form-label">Quantity</label>
-        <input type="number" name="quantity" id="quantity" class="form-control" min="1" value="1" required>
-    </div>
+        <div class="mb-3">
+            <label for="menu_items" class="form-label">Menu Items</label>
+            <select multiple class="form-control" id="menu_items" name="menu_items" required>
+                {% for menu_item in menu_items %}
+                    <option value="{{ menu_item.id }}">{{ menu_item.name }}</option>
+                {% endfor %}
+            </select>
+        </div>
 
-    <button type="submit" class="btn btn-success">Submit Order</button>
-</form>
+        <div class="mb-3">
+            <label for="total_price" class="form-label">Total Price</label>
+            <input type="number" class="form-control" id="total_price" name="total_price" step="0.01" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="status" class="form-label">Order Status</label>
+            <select class="form-control" id="status" name="status" required>
+                <option value="pending">Pending</option>
+                <option value="completed">Completed</option>
+            </select>
+        </div>
+
+        <button type="submit" class="btn btn-success">Create Order</button>
+    </form>
 {% endblock %}
+
 
 </body>
 </html>

@@ -5,21 +5,45 @@
     <title>Create Order</title>
 </head>
 <body>
-    <h1>Create an Order</h1>
-    <form method="post">
+  {% extends 'base.html' %}
+
+{% block title %}Add New Order - Django Delights{% endblock %}
+
+{% block content %}
+    <h1>Add New Order</h1>
+
+    <form action="/orders/add/" method="POST">
         {% csrf_token %}
-        {{ order_form.as_p }}
-        <label for="order_items">Items:</label>
-        <select name="order_items" id="order_items">
-            {% for menu_item in menu_items %}
-                <option value="{{ menu_item.id }}">{{ menu_item.name }} - ${{ menu_item.price }}</option>
-            {% endfor %}
-        </select>
+        <div class="mb-3">
+            <label for="customer" class="form-label">Customer Name</label>
+            <input type="text" class="form-control" id="customer" name="customer" required>
+        </div>
 
-        <label for="quantity">Quantity:</label>
-        <input type="number" name="quantity" id="quantity" min="1" value="1" required>
+        <div class="mb-3">
+            <label for="menu_items" class="form-label">Menu Items</label>
+            <select multiple class="form-control" id="menu_items" name="menu_items" required>
+                {% for menu_item in menu_items %}
+                    <option value="{{ menu_item.id }}">{{ menu_item.name }}</option>
+                {% endfor %}
+            </select>
+        </div>
 
-        <button type="submit">Add Order</button>
+        <div class="mb-3">
+            <label for="total_price" class="form-label">Total Price</label>
+            <input type="number" class="form-control" id="total_price" name="total_price" step="0.01" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="status" class="form-label">Order Status</label>
+            <select class="form-control" id="status" name="status" required>
+                <option value="pending">Pending</option>
+                <option value="completed">Completed</option>
+            </select>
+        </div>
+
+        <button type="submit" class="btn btn-success">Add Order</button>
     </form>
+{% endblock %}
+
 </body>
 </html>
