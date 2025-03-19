@@ -1,0 +1,147 @@
+[
+  {
+    "model": "auth.user",
+    "pk": 1,
+    "fields": {
+      "username": "testuser",
+      "password": "password",
+      "email": "testuser@example.com",
+      "first_name": "",
+      "last_name": "",
+      "is_active": true,
+      "is_staff": false,
+      "is_superuser": false,
+      "date_joined": "2025-03-19T00:00:00Z"
+    }
+  },
+  {
+    "model": "inventory.ingredient",
+    "pk": 1,
+    "fields": {
+      "name": "Tomato",
+      "price_per_unit": "2.50",
+      "available_quantity": 100.0,
+      "status": "available"
+    }
+  },
+  {
+    "model": "inventory.ingredient",
+    "pk": 2,
+    "fields": {
+      "name": "Cheese",
+      "price_per_unit": "5.00",
+      "available_quantity": 50.0,
+      "status": "available"
+    }
+  },
+  {
+    "model": "inventory.menuitem",
+    "pk": 1,
+    "fields": {
+      "name": "Cheese Pizza",
+      "category": "main_course",
+      "price": "10.00"
+    }
+  },
+  {
+    "model": "inventory.menuitem",
+    "pk": 2,
+    "fields": {
+      "name": "Tomato Soup",
+      "category": "appetizer",
+      "price": "5.00"
+    }
+  },
+  {
+    "model": "inventory.reciperequirement",
+    "pk": 1,
+    "fields": {
+      "menu_item": 1,
+      "ingredient": 1,
+      "quantity_required": 2.0
+    }
+  },
+  {
+    "model": "inventory.reciperequirement",
+    "pk": 2,
+    "fields": {
+      "menu_item": 1,
+      "ingredient": 2,
+      "quantity_required": 1.0
+    }
+  },
+  {
+    "model": "inventory.sale",
+    "pk": 1,
+    "fields": {
+      "menu_item": 1,
+      "quantity_sold": 10,
+      "timestamp": "2025-03-19T08:00:00Z"
+    }
+  },
+  {
+    "model": "inventory.sale",
+    "pk": 2,
+    "fields": {
+      "menu_item": 2,
+      "quantity_sold": 20,
+      "timestamp": "2025-03-19T09:00:00Z"
+    }
+  },
+  {
+    "model": "inventory.location",
+    "pk": 1,
+    "fields": {
+      "name": "Restaurant A",
+      "address": "123 Main St",
+      "phone_number": "555-1234"
+    }
+  },
+  {
+    "model": "inventory.order",
+    "pk": 1,
+    "fields": {
+      "customer": "John Doe",
+      "status": "new",
+      "order_date": "2025-03-19T08:30:00Z",
+      "total_price": 0.0
+    }
+  },
+  {
+    "model": "inventory.orderitem",
+    "pk": 1,
+    "fields": {
+      "order": 1,
+      "menu_item": 1,
+      "quantity": 2
+    }
+  },
+  {
+    "model": "inventory.orderitem",
+    "pk": 2,
+    "fields": {
+      "order": 1,
+      "menu_item": 2,
+      "quantity": 1
+    }
+  },
+  {
+    "model": "inventory.employee",
+    "pk": 1,
+    "fields": {
+      "user": 1,
+      "role": "chef",
+      "location": 1
+    }
+  },
+  {
+    "model": "inventory.inventoryhistory",
+    "pk": 1,
+    "fields": {
+      "ingredient": 1,
+      "change_date": "2025-03-19T08:00:00Z",
+      "change_amount": -10,
+      "reason": "Used in sale"
+    }
+  }
+]
