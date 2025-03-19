@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+        <a class="navbar-brand" href="{% url 'inventory_list' %}">Django Delights</a>
+        <div class="collapse navbar-collapse">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item"><a class="nav-link" href="{% url 'add_ingredient' %}">Add Ingredient</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'add_menu_item' %}">Add Menu Item</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'add_sale' %}">Add Sale</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'sales_report' %}">Sales Report</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+</body>
+</html>

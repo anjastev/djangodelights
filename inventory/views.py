@@ -38,6 +38,12 @@ def sales_report(request):
     sales = Sale.objects.all()
     return render(request, 'inventory/sales_report.html', {'sales': sales})
 
-
-def add_menu_item():
-    return render(request, 'inventory/add_menu_item.html')
+def add_menu_item(request):
+    if request.method == 'POST':
+        form = MenuItemForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('inventory_list')
+    else:
+        form = MenuItemForm()
+    return render(request, 'inventory/add_menu_item.html', {'form': form})
